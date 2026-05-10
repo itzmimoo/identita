@@ -38,7 +38,19 @@
             min-height: 100vh;
         }
 
-        /* scanline overlay */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            width: 0%;
+            z-index: 9999;
+            background: linear-gradient(90deg, #ff0000, #ff7700, #ffff00, #00ff00, #0099ff, #cc00ff);
+            background-size: 200% 100%;
+            box-shadow: 0 0 10px rgba(255,255,255,0.4);
+            transition: width 0.05s linear;
+        }
+
         body::before {
             content: '';
             position: fixed;
@@ -54,7 +66,6 @@
             z-index: 1000;
         }
 
-        /* HEADER */
         header {
             position: relative;
             padding: 60px 30px 50px;
@@ -105,7 +116,6 @@
             letter-spacing: 1px;
         }
 
-        /* NAV */
         nav {
             background: rgba(13,17,28,0.95);
             backdrop-filter: blur(12px);
@@ -148,14 +158,12 @@
 
         nav a:hover::after { width: 80%; }
 
-        /* CONTAINER */
         .container {
             max-width: 960px;
             margin: 0 auto;
             padding: 32px 20px 60px;
         }
 
-        /* CARD */
         .sezione {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -183,7 +191,6 @@
 
         .sezione:hover::before { opacity: 1; }
 
-        /* HEADINGS */
         .sezione h2 {
             font-size: 22px;
             font-weight: 800;
@@ -242,7 +249,6 @@
             top: 6px;
         }
 
-        /* QUOTE BOX */
         .definizione {
             border-left: 3px solid var(--cyan);
             background: var(--cyan-dim);
@@ -264,7 +270,6 @@
             letter-spacing: 1px;
         }
 
-        /* HIGHLIGHT */
         .highlight {
             background: rgba(0,229,255,0.15);
             color: var(--cyan);
@@ -273,7 +278,6 @@
             font-weight: 600;
         }
 
-        /* IMAGES */
         .img-grande {
             display: block;
             width: 100%;
@@ -295,7 +299,6 @@
             filter: brightness(0.85) saturate(1.1);
         }
 
-        /* LIVELLO SPID */
         .livello {
             display: flex;
             align-items: flex-start;
@@ -334,7 +337,6 @@
             color: #fff;
         }
 
-        /* TABLE */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -368,7 +370,6 @@
             color: #fff;
         }
 
-        /* MINACCIA */
         .minaccia {
             border: 1px solid rgba(255,45,120,0.2);
             background: var(--magenta-dim);
@@ -397,7 +398,6 @@
             margin-bottom: 8px;
         }
 
-        /* CONSIGLIO LISTA */
         .consiglio-lista {
             list-style: none;
             margin: 0;
@@ -429,7 +429,6 @@
             top: 11px;
         }
 
-        /* ACCORDION */
         .accordion-btn {
             background: var(--bg-card2);
             border: 1px solid var(--border);
@@ -477,7 +476,6 @@
 
         .accordion-content.aperto { display: block; }
 
-        /* BADGE CHIP */
         .chip {
             display: inline-block;
             font-family: 'Space Mono', monospace;
@@ -492,10 +490,8 @@
             margin: 2px;
         }
 
-        /* CLEARFIX */
         .clearfix::after { content: ""; display: table; clear: both; }
 
-        /* FOOTER */
         footer {
             background: var(--bg-card);
             border-top: 1px solid var(--border);
@@ -512,7 +508,6 @@
             color: var(--cyan);
         }
 
-        /* STRUMENTI GRID */
         .strumenti-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -555,7 +550,6 @@
             margin-top: 4px;
         }
 
-        /* STAT ROW */
         .stat-row {
             display: flex;
             gap: 16px;
@@ -589,14 +583,12 @@
             letter-spacing: 1px;
         }
 
-        /* WARNING LIST (cosa non fare) */
         .warning-lista li::before {
             content: '✕';
             color: var(--magenta);
             font-size: 11px;
         }
 
-        /* WALLET DOCS */
         .wallet-grid {
             display: flex;
             flex-wrap: wrap;
@@ -618,7 +610,6 @@
             .sezione { padding: 20px 16px; }
         }
 
-        /* Animation on load */
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(16px); }
             to { opacity: 1; transform: translateY(0); }
@@ -636,6 +627,8 @@
     </style>
 </head>
 <body>
+
+<div id="progress-bar"></div>
 
 <header>
     <p class="header-eyebrow">// Sicurezza Informatica — Samuel Sema</p>
@@ -1232,7 +1225,6 @@
 <script>
     function toggleAccordion(btn, id) {
         var el = document.getElementById(id);
-        var isOpen = el.classList.contains('aperto');
         el.classList.toggle('aperto');
         btn.classList.toggle('aperto');
     }
@@ -1243,6 +1235,16 @@
             var target = document.querySelector(this.getAttribute('href'));
             if (target) target.scrollIntoView({ behavior: 'smooth' });
         });
+    });
+
+    var bar = document.getElementById('progress-bar');
+    window.addEventListener('scroll', function() {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = pct + '%';
+        var hue = Math.round(pct * 2.7);
+        bar.style.background = 'linear-gradient(90deg, hsl(0,100%,50%), hsl(' + hue + ',100%,50%))';
     });
 </script>
 
