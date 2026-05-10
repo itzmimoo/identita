@@ -4,188 +4,400 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Identità Digitale - SAMUEL SEMA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg: #080b12;
+            --bg-card: #0d111c;
+            --bg-card2: #111827;
+            --cyan: #00e5ff;
+            --cyan-dim: rgba(0,229,255,0.12);
+            --cyan-border: rgba(0,229,255,0.3);
+            --magenta: #ff2d78;
+            --magenta-dim: rgba(255,45,120,0.1);
+            --green: #39ff7a;
+            --green-dim: rgba(57,255,122,0.1);
+            --amber: #ffb800;
+            --amber-dim: rgba(255,184,0,0.1);
+            --text: #c9d6e8;
+            --text-muted: #6b7b99;
+            --border: rgba(255,255,255,0.07);
+            --border-glow: rgba(0,229,255,0.25);
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            color: #222;
-            font-size: 16px;
-            line-height: 1.6;
+            font-family: 'Syne', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            font-size: 15px;
+            line-height: 1.7;
+            min-height: 100vh;
         }
 
+        /* scanline overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0,0,0,0.07) 2px,
+                rgba(0,0,0,0.07) 4px
+            );
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* HEADER */
         header {
-            background-color: #2c5f8a;
-            color: white;
-            padding: 20px 30px;
+            position: relative;
+            padding: 60px 30px 50px;
             text-align: center;
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+            background: linear-gradient(180deg, #0a0f1e 0%, var(--bg) 100%);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -80px; left: 50%; transform: translateX(-50%);
+            width: 600px; height: 300px;
+            background: radial-gradient(ellipse, rgba(0,229,255,0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .header-eyebrow {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--cyan);
+            margin-bottom: 16px;
+            opacity: 0.8;
         }
 
         header h1 {
-            font-size: 28px;
-            margin-bottom: 6px;
+            font-size: clamp(36px, 7vw, 72px);
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1;
+            color: #fff;
+            text-shadow: 0 0 40px rgba(0,229,255,0.3);
+            margin-bottom: 12px;
+        }
+
+        header h1 span {
+            color: var(--cyan);
+            text-shadow: 0 0 20px var(--cyan), 0 0 60px rgba(0,229,255,0.4);
         }
 
         header p {
-            font-size: 14px;
-            color: #cce0f5;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
         }
 
+        /* NAV */
         nav {
-            background-color: #1a3f5c;
+            background: rgba(13,17,28,0.95);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+            padding: 0 20px;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 4px;
-            padding: 8px 10px;
+            gap: 2px;
         }
 
         nav a {
-            color: #cce0f5;
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-muted);
             text-decoration: none;
-            font-size: 13px;
-            padding: 5px 12px;
-            border-radius: 3px;
+            padding: 14px 12px;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 0; height: 2px;
+            background: var(--cyan);
+            box-shadow: 0 0 8px var(--cyan);
+            transition: width 0.2s;
         }
 
         nav a:hover {
-            background-color: #2c5f8a;
-            color: white;
+            color: var(--cyan);
         }
 
+        nav a:hover::after { width: 80%; }
+
+        /* CONTAINER */
         .container {
             max-width: 960px;
             margin: 0 auto;
-            padding: 20px 15px;
+            padding: 32px 20px 60px;
         }
 
+        /* CARD */
         .sezione {
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
             margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s;
         }
 
+        .sezione:hover {
+            border-color: var(--border-glow);
+        }
+
+        .sezione::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .sezione:hover::before { opacity: 1; }
+
+        /* HEADINGS */
         .sezione h2 {
-            font-size: 20px;
-            color: #2c5f8a;
-            border-bottom: 2px solid #2c5f8a;
-            padding-bottom: 6px;
-            margin-bottom: 14px;
+            font-size: 22px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sezione h2::before {
+            content: '';
+            display: block;
+            width: 4px;
+            height: 22px;
+            background: var(--cyan);
+            box-shadow: 0 0 10px var(--cyan);
+            border-radius: 2px;
+            flex-shrink: 0;
         }
 
         .sezione h3 {
-            font-size: 16px;
-            color: #1a3f5c;
-            margin: 16px 0 6px 0;
+            font-size: 13px;
+            font-weight: 700;
+            font-family: 'Space Mono', monospace;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--cyan);
+            margin: 24px 0 10px;
         }
 
         .sezione p {
+            color: var(--text);
             margin-bottom: 10px;
             text-align: justify;
         }
 
         .sezione ul {
-            margin: 8px 0 10px 20px;
+            margin: 8px 0 12px 0;
+            list-style: none;
+            padding: 0;
         }
 
         .sezione ul li {
-            margin-bottom: 5px;
+            padding: 4px 0 4px 20px;
+            position: relative;
+            color: var(--text);
         }
 
+        .sezione ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--cyan);
+            font-size: 11px;
+            top: 6px;
+        }
+
+        /* QUOTE BOX */
         .definizione {
-            border-left: 4px solid #2c5f8a;
-            background-color: #eef5fb;
-            padding: 12px 16px;
-            margin: 14px 0;
+            border-left: 3px solid var(--cyan);
+            background: var(--cyan-dim);
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-radius: 0 8px 8px 0;
             font-style: italic;
+            color: var(--text);
+            font-size: 14px;
         }
 
+        .definizione small {
+            display: block;
+            margin-top: 8px;
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--cyan);
+            font-style: normal;
+            letter-spacing: 1px;
+        }
+
+        /* HIGHLIGHT */
+        .highlight {
+            background: rgba(0,229,255,0.15);
+            color: var(--cyan);
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        /* IMAGES */
         .img-grande {
             display: block;
             width: 100%;
             height: auto;
-            border-radius: 4px;
-            margin: 14px 0;
+            border-radius: 8px;
+            margin: 16px 0;
+            border: 1px solid var(--border);
+            filter: brightness(0.85) saturate(1.1);
         }
 
         .img-piccola {
             display: block;
-            width: 240px;
+            width: 220px;
             height: auto;
-            border-radius: 4px;
+            border-radius: 8px;
             float: right;
-            margin: 0 0 12px 18px;
+            margin: 0 0 16px 20px;
+            border: 1px solid var(--border);
+            filter: brightness(0.85) saturate(1.1);
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 12px;
-            font-size: 14px;
-        }
-
-        table th {
-            background-color: #2c5f8a;
-            color: white;
-            padding: 9px 12px;
-            text-align: left;
-        }
-
-        table td {
-            padding: 8px 12px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        table tr:nth-child(even) td {
-            background-color: #f0f6fb;
-        }
-
+        /* LIVELLO SPID */
         .livello {
             display: flex;
             align-items: flex-start;
-            gap: 12px;
+            gap: 14px;
             margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            background-color: #fafafa;
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg-card2);
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .livello:hover {
+            border-color: var(--cyan-border);
+            background: var(--cyan-dim);
         }
 
         .livello .numero {
-            background-color: #2c5f8a;
-            color: white;
+            background: transparent;
+            border: 2px solid var(--cyan);
+            color: var(--cyan);
             min-width: 34px;
             height: 34px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 16px;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 14px;
             flex-shrink: 0;
+            box-shadow: 0 0 10px rgba(0,229,255,0.3);
         }
 
+        .livello strong {
+            color: #fff;
+        }
+
+        /* TABLE */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+            font-size: 13px;
+        }
+
+        table th {
+            background: var(--cyan-dim);
+            color: var(--cyan);
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 10px 14px;
+            text-align: left;
+            border-bottom: 1px solid var(--cyan-border);
+        }
+
+        table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        table tr:hover td {
+            background: rgba(255,255,255,0.02);
+        }
+
+        table td strong {
+            color: #fff;
+        }
+
+        /* MINACCIA */
         .minaccia {
-            border: 1px solid #e0c0c0;
-            background-color: #fff8f8;
-            border-radius: 4px;
-            padding: 12px 16px;
+            border: 1px solid rgba(255,45,120,0.2);
+            background: var(--magenta-dim);
+            border-radius: 8px;
+            padding: 16px 20px;
             margin-bottom: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .minaccia::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0;
+            width: 3px; height: 100%;
+            background: var(--magenta);
+            box-shadow: 0 0 8px var(--magenta);
         }
 
         .minaccia h4 {
-            color: #a33;
-            margin-bottom: 5px;
-            font-size: 15px;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--magenta);
+            margin-bottom: 8px;
         }
 
+        /* CONSIGLIO LISTA */
         .consiglio-lista {
             list-style: none;
             margin: 0;
@@ -193,68 +405,242 @@
         }
 
         .consiglio-lista li {
-            padding: 8px 10px 8px 32px;
-            border-bottom: 1px solid #eee;
+            padding: 10px 14px 10px 36px;
+            border-bottom: 1px solid var(--border);
             position: relative;
+            color: var(--text);
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .consiglio-lista li:last-child { border-bottom: none; }
+
+        .consiglio-lista li:hover {
+            background: rgba(255,255,255,0.02);
         }
 
         .consiglio-lista li::before {
-            content: ">";
+            content: '//';
             position: absolute;
             left: 10px;
-            color: #2c5f8a;
-            font-weight: bold;
+            color: var(--green);
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            top: 11px;
         }
 
+        /* ACCORDION */
         .accordion-btn {
-            background: none;
-            border: none;
-            color: #2c5f8a;
+            background: var(--bg-card2);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-family: 'Syne', sans-serif;
             font-size: 14px;
+            font-weight: 600;
             cursor: pointer;
-            padding: 4px 0;
-            font-weight: bold;
-            display: block;
+            padding: 12px 16px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
             margin-top: 10px;
-            text-decoration: underline;
+            transition: border-color 0.2s, color 0.2s;
+            text-decoration: none;
+        }
+
+        .accordion-btn::after {
+            content: '+';
+            font-family: 'Space Mono', monospace;
+            color: var(--cyan);
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .accordion-btn.aperto::after { content: '−'; }
+
+        .accordion-btn:hover {
+            border-color: var(--cyan-border);
+            color: var(--cyan);
         }
 
         .accordion-content {
             display: none;
-            margin-top: 8px;
+            padding: 14px 16px;
+            background: var(--bg-card2);
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            font-size: 14px;
+            color: var(--text);
         }
 
-        .accordion-content.aperto {
-            display: block;
+        .accordion-content.aperto { display: block; }
+
+        /* BADGE CHIP */
+        .chip {
+            display: inline-block;
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 20px;
+            border: 1px solid var(--cyan-border);
+            color: var(--cyan);
+            background: var(--cyan-dim);
+            margin: 2px;
         }
 
+        /* CLEARFIX */
+        .clearfix::after { content: ""; display: table; clear: both; }
+
+        /* FOOTER */
         footer {
-            background-color: #1a3f5c;
-            color: #aac8df;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
             text-align: center;
-            padding: 14px;
-            font-size: 13px;
-            margin-top: 30px;
+            padding: 24px;
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
         }
 
-        .clearfix::after {
-            content: "";
-            display: table;
-            clear: both;
+        footer span {
+            color: var(--cyan);
         }
 
-        .highlight {
-            background-color: #fff3cd;
-            padding: 1px 4px;
-            border-radius: 2px;
+        /* STRUMENTI GRID */
+        .strumenti-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
         }
+
+        .strumento-card {
+            background: var(--bg-card2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 18px;
+            transition: border-color 0.2s, transform 0.2s;
+            cursor: default;
+        }
+
+        .strumento-card:hover {
+            border-color: var(--cyan-border);
+            transform: translateY(-2px);
+        }
+
+        .strumento-card .tag {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--cyan);
+            margin-bottom: 6px;
+        }
+
+        .strumento-card .nome {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .strumento-card .desc {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* STAT ROW */
+        .stat-row {
+            display: flex;
+            gap: 16px;
+            margin: 16px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            flex: 1;
+            min-width: 120px;
+            background: var(--bg-card2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .stat-box .num {
+            font-family: 'Space Mono', monospace;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--cyan);
+            text-shadow: 0 0 20px rgba(0,229,255,0.4);
+            line-height: 1;
+        }
+
+        .stat-box .label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 6px;
+            letter-spacing: 1px;
+        }
+
+        /* WARNING LIST (cosa non fare) */
+        .warning-lista li::before {
+            content: '✕';
+            color: var(--magenta);
+            font-size: 11px;
+        }
+
+        /* WALLET DOCS */
+        .wallet-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        strong { color: #dce8f8; }
+
+        @media (max-width: 600px) {
+            .img-piccola {
+                float: none;
+                width: 100%;
+                margin: 0 0 16px 0;
+            }
+
+            header h1 { font-size: 36px; }
+
+            .sezione { padding: 20px 16px; }
+        }
+
+        /* Animation on load */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .sezione {
+            animation: fadeUp 0.5s ease both;
+        }
+
+        .sezione:nth-child(1) { animation-delay: 0.05s; }
+        .sezione:nth-child(2) { animation-delay: 0.1s; }
+        .sezione:nth-child(3) { animation-delay: 0.15s; }
+        .sezione:nth-child(4) { animation-delay: 0.2s; }
+        .sezione:nth-child(5) { animation-delay: 0.25s; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Identità Digitale</h1>
-    <p>Cosa è, come funziona e come proteggerla -- Samuel Sema</p>
+    <p class="header-eyebrow">// Sicurezza Informatica — Samuel Sema</p>
+    <h1>Identità <span>Digitale</span></h1>
+    <p>Cosa è, come funziona e come proteggerla</p>
 </header>
 
 <nav>
@@ -263,12 +649,12 @@
     <a href="#spid">SPID</a>
     <a href="#cie">CIE</a>
     <a href="#cns">CNS</a>
-    <a href="#firma">Firma Digitale</a>
+    <a href="#firma">Firma</a>
     <a href="#pec">PEC</a>
     <a href="#confronto">Confronto</a>
     <a href="#reputazione">Reputazione</a>
     <a href="#minacce">Minacce</a>
-    <a href="#protezione">Come proteggersi</a>
+    <a href="#protezione">Protezione</a>
     <a href="#itwallet">IT-Wallet</a>
     <a href="#applicazioni">Applicazioni</a>
 </nav>
@@ -289,38 +675,33 @@
             un'azienda o un oggetto e che vengono raccolti, memorizzati e condivisi digitalmente all'interno di
             un ecosistema di attori e attraverso le tecnologie abilitanti e che permette l'accesso a servizi
             digitali a valore aggiunto."
-            <br><small>- Osservatorio Digital Identity, Politecnico di Milano</small>
+            <small>— Osservatorio Digital Identity, Politecnico di Milano</small>
         </div>
 
         <p>
             Quando pubblichiamo o condividiamo informazioni personali online stiamo creando o incrementando
             la nostra <strong>identità digitale</strong>. Al nostro nome online vengono associati tutti gli
-            attributi che servono per definire la nostra personalita privata e professionale: data di nascita,
+            attributi che servono per definire la nostra personalità privata e professionale: data di nascita,
             informazioni sanitarie, indirizzo, numero di telefono, ID di accesso agli account, ecc.
         </p>
 
         <img src="img/schema_id.jpg" alt="Schema Identità digitale" class="img-grande">
 
         <h3>Elementi base</h3>
-        <p>Gli elementi base dell'identità digitale sono due:</p>
         <ul>
-            <li><strong>L'identità</strong>, cioè il soggetto</li>
-            <li><strong>Gli attributi dell'identità</strong>: tutte le informazioni che vanno oltre i dati anagrafici e biometrici,
-                come il possesso di una patente, certificazioni, brevetti o una laurea.</li>
+            <li><strong>L'identità</strong> — il soggetto</li>
+            <li><strong>Gli attributi dell'identità</strong> — tutte le informazioni oltre ai dati anagrafici e biometrici: patente, certificazioni, brevetti, laurea.</li>
         </ul>
 
         <h3>I due volti dell'identità</h3>
-        <p>
-            L'identità digitale ha due facce principali:
-        </p>
         <ul>
-            <li><strong>Identità Certificata:</strong> SPID, CIE usate per accedere ai servizi pubblici</li>
+            <li><strong>Identità Certificata:</strong> SPID, CIE — per accedere ai servizi pubblici</li>
             <li><strong>Identità Sociale:</strong> come ci presentiamo su Instagram, TikTok, LinkedIn</li>
         </ul>
 
-        <p style="font-style: italic; color: #444;">"Noi siamo ciò che pubblichiamo e ciò che gli altri dicono di noi."</p>
+        <p style="margin-top: 14px; color: var(--text-muted); font-style: italic; font-size: 14px;">"Noi siamo ciò che pubblichiamo e ciò che gli altri dicono di noi."</p>
 
-        <p style="margin-top: 10px;">
+        <p style="margin-top: 12px;">
             Navigando sul web non si può mai agire in maniera completamente anonima:
             <span class="highlight">nel web siamo tutti rintracciabili.</span>
         </p>
@@ -328,50 +709,64 @@
 
     <div class="sezione" id="strumenti">
         <h2>Strumenti di Identità Digitale in Italia</h2>
-        <p>Gli strumenti di identità digitale attivi in Italia sono quattro principali:</p>
-        <ul>
-            <li><strong>SPID</strong> Sistema Pubblico per l'Identità Digitale</li>
-            <li><strong>CIE</strong> Carta d'Identità Elettronica</li>
-            <li><strong>CNS</strong> Carta Nazionale dei Servizi</li>
-            <li><strong>Firma digitale</strong></li>
-        </ul>
-        <p>
+
+        <div class="strumenti-grid">
+            <div class="strumento-card">
+                <div class="tag">01</div>
+                <div class="nome">SPID</div>
+                <div class="desc">Sistema Pubblico di Identità Digitale</div>
+            </div>
+            <div class="strumento-card">
+                <div class="tag">02</div>
+                <div class="nome">CIE</div>
+                <div class="desc">Carta d'Identità Elettronica</div>
+            </div>
+            <div class="strumento-card">
+                <div class="tag">03</div>
+                <div class="nome">CNS</div>
+                <div class="desc">Carta Nazionale dei Servizi</div>
+            </div>
+            <div class="strumento-card">
+                <div class="tag">04</div>
+                <div class="nome">Firma</div>
+                <div class="desc">Firma Digitale</div>
+            </div>
+        </div>
+
+        <p style="margin-top: 18px;">
             A partire dal <strong>28 febbraio 2021</strong>, SPID e CIE sono diventate le credenziali uniche per
             accedere ai servizi online della Pubblica Amministrazione. Le vecchie credenziali sono rimaste valide
-            fino al 1 ottobre 2021.
+            fino al <strong>1 ottobre 2021</strong>.
         </p>
     </div>
 
     <div class="sezione" id="spid">
-        <h2>SPID Sistema Pubblico di Identità Digitale</h2>
+        <h2>SPID — Sistema Pubblico di Identità Digitale</h2>
 
         <div class="clearfix">
             <img src="img/spid_logo.jpg" alt="Logo SPID" class="img-piccola">
 
             <p>
                 Lo SPID è attivo in Italia dal <strong>15 marzo 2016</strong>. Permette di accedere a tutti i servizi online
-                della Pubblica Amministrazione con un unico sistema di credenziali (username e password),
-                senza dover ricordare decine di password diverse né fare file agli sportelli.
+                della Pubblica Amministrazione con un unico sistema di credenziali, senza dover ricordare
+                decine di password diverse né fare file agli sportelli.
             </p>
 
             <p>
                 Con un solo account è possibile accedere a oltre <strong>5.300</strong> tra amministrazioni locali e centrali,
-                enti pubblici e agenzie. Funziona da qualsiasi dispositivo come computer, tablet e smartphone.
+                enti pubblici e agenzie. Funziona da qualsiasi dispositivo.
             </p>
 
-            <p>
-                SPID può essere rilasciato da diversi <strong>IdP</strong> autorizzati, tra cui:
-                Aruba, InfoCert, Lepida, Namirial, Poste Italiane, Register, Sielte, TeamSystem e TIM.
-            </p>
+            <p>SPID può essere rilasciato da diversi <strong>IdP</strong> autorizzati, tra cui: Aruba, InfoCert, Lepida, Namirial, Poste Italiane, Register, Sielte, TeamSystem e TIM.</p>
         </div>
 
         <h3>Cosa serve per richiederlo</h3>
         <ul>
             <li>Avere compiuto 18 anni</li>
-            <li>Un documento italiano in corso di validita</li>
+            <li>Un documento italiano in corso di validità</li>
             <li>La tessera sanitaria con il codice fiscale</li>
             <li>Un indirizzo email personale</li>
-            <li>Il numero di telefono del proprio cellulare personale</li>
+            <li>Il numero di telefono del proprio cellulare</li>
         </ul>
 
         <h3>I tre livelli di sicurezza SPID</h3>
@@ -379,43 +774,54 @@
         <div class="livello">
             <div class="numero">1</div>
             <div>
-                <strong>Livello 1 Username e password</strong><br>
-                Richiede solo di inserire il nome utente e la password. Adatto per servizi con bassa criticita.
+                <strong>Username e password</strong><br>
+                <span style="font-size: 13px; color: var(--text-muted);">Richiede solo di inserire il nome utente e la password. Adatto per servizi con bassa criticità.</span>
             </div>
         </div>
         <div class="livello">
             <div class="numero">2</div>
             <div>
-                <strong>Livello 2 Credenziali + OTP</strong><br>
-                Oltre alle credenziali richiede l'immissione di un codice temporaneo (OTP) generato da
-                un'apposita app. È il livello più comunemente usato.
+                <strong>Credenziali + OTP</strong><br>
+                <span style="font-size: 13px; color: var(--text-muted);">Oltre alle credenziali richiede l'immissione di un codice temporaneo (OTP) generato da un'app. È il livello più comunemente usato.</span>
             </div>
         </div>
         <div class="livello">
             <div class="numero">3</div>
             <div>
-                <strong>Livello 3 Massima sicurezza</strong><br>
-                Prevede, oltre a username e password, l'uso di un supporto fisico (es. smart card) che
-                gestisce chiavi crittografiche. Offerto solo da alcuni Identity Provider.
+                <strong>Massima sicurezza</strong><br>
+                <span style="font-size: 13px; color: var(--text-muted);">Prevede, oltre a username e password, l'uso di un supporto fisico (es. smart card) con chiavi crittografiche. Offerto solo da alcuni IdP.</span>
             </div>
         </div>
 
         <h3>I numeri di SPID</h3>
-        <p>
-            SPID è l'identità digitale certificata più utilizzata in Italia. Il numero di rilasci è passato da circa
-            9 milioni di utenti nel luglio 2020 a oltre 33 milioni a fine 2022, con una crescita del 23%.
-            Nel 2022 si è superato il <strong>miliardo di accessi</strong>, con una crescita del 78% rispetto all'anno precedente.
-        </p>
 
-        <p style="font-size: 13px; color: #555; margin-top: 8px;">
+        <div class="stat-row">
+            <div class="stat-box">
+                <div class="num">33M+</div>
+                <div class="label">Utenti a fine 2022</div>
+            </div>
+            <div class="stat-box">
+                <div class="num">1B+</div>
+                <div class="label">Accessi nel 2022</div>
+            </div>
+            <div class="stat-box">
+                <div class="num">+78%</div>
+                <div class="label">Crescita accessi YoY</div>
+            </div>
+            <div class="stat-box">
+                <div class="num">5.300</div>
+                <div class="label">Enti accessibili</div>
+            </div>
+        </div>
+
+        <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px;">
             La privacy dei dati è garantita e vigilata dal Garante per la protezione dei dati personali.
-            Le informazioni comunicate al gestore di Identità non possono essere utilizzate per scopi commerciali
-            nè cedute a terze parti senza autorizzazione dell'utente.
+            Le informazioni comunicate al gestore di Identità non possono essere utilizzate per scopi commerciali.
         </p>
     </div>
 
     <div class="sezione" id="cie">
-        <h2>CIE Carta d'Identità Elettronica</h2>
+        <h2>CIE — Carta d'Identità Elettronica</h2>
 
         <div class="clearfix">
             <img src="img/CIE.jpg" alt="Carta d'Identità Elettronica" class="img-piccola">
@@ -424,26 +830,22 @@
                 La CIE è il documento d'Identità dei cittadini italiani emesso dal <strong>Ministero dell'Interno</strong>
                 e prodotto dal Poligrafico e Zecca dello Stato. Grazie a sofisticati elementi di sicurezza e
                 anticontraffazione, permette l'accertamento dell'identità del possessore e l'accesso ai servizi
-                online delle Pubbliche Amministrazioni sia in Italia che nei Paesi dell'Unione Europea.
+                online delle PA sia in Italia che nei Paesi dell'Unione Europea.
             </p>
 
             <p>
                 La CIE contiene un <strong>microchip</strong> con ulteriori dati per la fruizione di servizi a valore aggiunto.
-                È abbinata a un codice PIN fornito al momento del rilascio, utilizzabile per accedere a servizi
-                online con elevato livello di criticita.
+                È abbinata a un codice PIN fornito al momento del rilascio.
             </p>
 
             <p>
-                A differenza dello SPID (gratuito), la CIE ha un <strong>costo di 16,79 euro</strong> e viene rilasciata
-                anche ai minori, fin dalla nascita. Dal 2022 e' possibile usare la CIE anche per servizi di
-                livello 2, tramite username, password e codice OTP tramite l'app <strong>CieID</strong>.
+                A differenza dello SPID (gratuito), la CIE ha un costo di <span class="highlight">16,79 euro</span> e viene rilasciata
+                anche ai minori, fin dalla nascita. Dal 2022 è possibile usare la CIE anche per servizi di
+                livello 2, tramite l'app <strong>CieID</strong>.
             </p>
         </div>
 
-        <p>
-            Per la lettura della carta è necessario un lettore di carte elettroniche oppure uno smartphone
-            con tecnologia <strong>NFC</strong> e l'app CieID.
-        </p>
+        <p>Per la lettura della carta è necessario un lettore di carte elettroniche oppure uno smartphone con tecnologia <strong>NFC</strong>.</p>
 
         <h3>Livelli di autenticazione CIE</h3>
         <div class="livello">
@@ -452,16 +854,16 @@
         </div>
         <div class="livello">
             <div class="numero">2</div>
-            <div><strong>Credenziali + secondo fattore</strong> (OTP via SMS o scansione QR code)</div>
+            <div><strong>Credenziali + secondo fattore</strong> <span style="font-size: 13px; color: var(--text-muted);">(OTP via SMS o scansione QR code)</span></div>
         </div>
         <div class="livello">
             <div class="numero">3</div>
-            <div><strong>Lettore NFC o smart card reader</strong> il livello massimo previsto dagli standard europei</div>
+            <div><strong>Lettore NFC o smart card reader</strong> <span style="font-size: 13px; color: var(--text-muted);">— il livello massimo previsto dagli standard europei</span></div>
         </div>
     </div>
 
     <div class="sezione" id="cns">
-        <h2>CNS Carta Nazionale dei Servizi</h2>
+        <h2>CNS — Carta Nazionale dei Servizi</h2>
 
         <div class="clearfix">
             <img src="img/tessera.jpg" alt="Tessera sanitaria CNS" class="img-piccola">
@@ -493,7 +895,7 @@
         <h2>Firma Digitale</h2>
 
         <div class="clearfix">
-            <img src="img/firma_digitale.jpg" alt="Firma digitale" class="img-piccola" style="width: 440px;">
+            <img src="img/firma_digitale.jpg" alt="Firma digitale" class="img-piccola" style="width: 360px;">
 
             <p>
                 La firma digitale si basa su tecniche di <strong>crittografia</strong> e permette di associare in modo sicuro
@@ -501,43 +903,36 @@
                 attribuendo loro <strong>validità legale</strong>.
             </p>
 
-            <p>
-                Ha lo stesso valore legale di una firma autografa e garantisce:
-            </p>
+            <p>Ha lo stesso valore legale di una firma autografa e garantisce:</p>
             <ul>
-                <li><strong>Autenticità della firma</strong> identità del sottoscrittore</li>
-                <li><strong>Integrità del documento</strong> nessuna modifica dopo la firma</li>
-                <li><strong>Non ripudio</strong> il sottoscrittore non può disconoscerla senza prove</li>
+                <li><strong>Autenticità della firma</strong> — identità del sottoscrittore</li>
+                <li><strong>Integrità del documento</strong> — nessuna modifica dopo la firma</li>
+                <li><strong>Non ripudio</strong> — il sottoscrittore non può disconoscerla senza prove</li>
             </ul>
 
             <p>
-                Si ottiene dai prestatori di servizi fiduciari presenti negli elenchi di fiducia dei singoli Stati
-                membri europei. I prodotti più comuni sono una <strong>smart card</strong> con certificato di firma o una
-                <strong>chiavetta USB</strong> con sim card integrata contenente il certificato.
+                I prodotti più comuni sono una <strong>smart card</strong> con certificato di firma o una
+                <strong>chiavetta USB</strong> con sim card integrata.
             </p>
         </div>
     </div>
 
     <div class="sezione" id="pec">
-        <h2>PEC Posta Elettronica Certificata</h2>
+        <h2>PEC — Posta Elettronica Certificata</h2>
 
         <div class="clearfix">
-            <img src="img/pec.jpg" alt="Posta Elettronica Certificata" class="img-piccola" style="width: 500px;">
+            <img src="img/pec.jpg" alt="Posta Elettronica Certificata" class="img-piccola" style="width: 360px;">
 
             <p>
                 La PEC è un sistema informatico che permette di inviare e ricevere email con <strong>validità giuridica</strong>,
-                equiparabili per legge a una raccomandata con ricevuta di ritorno. Identifica in maniera univoca
-                mittente e destinatario, garantendo che il contenuto non sia modificabile.
+                equiparabili per legge a una raccomandata con ricevuta di ritorno.
             </p>
 
-            <p>
-                Caratteristiche principali:
-            </p>
             <ul>
-                <li>Certifica l'invio e la ricezione del messaggio con data e ora</li>
+                <li>Certifica l'invio e la ricezione con data e ora</li>
                 <li>Il contenuto è garantito e non modificabile</li>
-                <li>I messaggi vanno conservati per 10 anni (valore giuridico)</li>
-                <li>Il gestore del servizio offre solitamente anche il servizio di conservazione digitale</li>
+                <li>I messaggi vanno conservati per <strong>10 anni</strong> (valore giuridico)</li>
+                <li>Il gestore offre solitamente anche il servizio di conservazione digitale</li>
             </ul>
 
             <h3>Perché attivare una PEC?</h3>
@@ -546,7 +941,7 @@
                 <li>Invio documenti alla Pubblica Amministrazione</li>
                 <li>Ricevere fatture elettroniche</li>
                 <li>Disdire polizze assicurative e contratti</li>
-                <li>Comunicazioni di lavoro (come la busta paga)</li>
+                <li>Comunicazioni di lavoro e buste paga</li>
                 <li>Comunicare con banche e istituti finanziari</li>
                 <li>Prenotare visite mediche e ricevere referti</li>
             </ul>
@@ -555,13 +950,13 @@
         <h3>Domicilio Digitale (INAD)</h3>
         <p>
             Una volta ottenuta la casella PEC, è possibile nominare il proprio domicilio digitale su
-            <strong>INAD</strong> (Indice Nazionale dei Domicili Digitali) all'indirizzo domiciliodigitale.gov.it.
-            Si accede con CIE, SPID o CNS e si inserisce l'indirizzo PEC.
+            <strong>INAD</strong> (Indice Nazionale dei Domicili Digitali) all'indirizzo <em>domiciliodigitale.gov.it</em>.
+            Si accede con CIE, SPID o CNS.
         </p>
     </div>
 
     <div class="sezione" id="confronto">
-        <h2>Confronto tra SPID e CIE</h2>
+        <h2>Confronto: SPID vs CIE</h2>
 
         <table>
             <thead>
@@ -584,7 +979,7 @@
                 </tr>
                 <tr>
                     <td>Costo</td>
-                    <td>Gratuito</td>
+                    <td><span style="color: var(--green);">Gratuito</span></td>
                     <td>16,79 euro</td>
                 </tr>
                 <tr>
@@ -593,7 +988,7 @@
                     <td>Fin dalla nascita</td>
                 </tr>
                 <tr>
-                    <td>Livello sicurezza massimo</td>
+                    <td>Sicurezza massima</td>
                     <td>Livello 3 (solo alcuni IdP)</td>
                     <td>Livello 3 (di default)</td>
                 </tr>
@@ -605,12 +1000,12 @@
                 <tr>
                     <td>Valido in UE</td>
                     <td>Solo in Italia</td>
-                    <td>Si, anche in altri Paesi UE</td>
+                    <td><span style="color: var(--green);">Sì, anche in altri Paesi UE</span></td>
                 </tr>
                 <tr>
                     <td>Firma documenti online</td>
-                    <td>Si</td>
-                    <td>Si</td>
+                    <td>Sì</td>
+                    <td>Sì</td>
                 </tr>
             </tbody>
         </table>
@@ -624,65 +1019,59 @@
             Ogni click, ogni post, ogni ricerca contribuisce a costruire la nostra reputazione digitale.
         </p>
 
-        <img src="img/digital_foor.jpg" alt="Digital footprint - impronta digitale" class="img-grande">
+        <img src="img/digital_foor.jpg" alt="Digital footprint" class="img-grande">
 
         <h3>Perché è importante?</h3>
         <ul>
             <li>Influenza le amicizie e i rapporti sociali</li>
             <li>Viene controllata da università e futuri datori di lavoro</li>
-            <li>Il web non dimentica facilmente (<strong>Diritto all'oblio</strong>)</li>
+            <li>Il web non dimentica facilmente — <strong>Diritto all'oblio</strong></li>
         </ul>
 
         <h3>Motivazioni per proteggere l'identità digitale</h3>
 
-        <button class="accordion-btn" onclick="toggleAccordion('acc1')">Difendere la reputazione</button>
+        <button class="accordion-btn" onclick="toggleAccordion(this, 'acc1')">Difendere la reputazione</button>
         <div class="accordion-content" id="acc1">
-            <p>
-                Anche senza perdita di denaro, un attacco alla credibilita può danneggiarci a livello professionale
-                o privato. La comparsa di video compromettenti sui social, l'invio di mail denigratorie o la
-                pubblicazione di post offensivi sui profili aziendali possono creare un danno che richiede
-                tempo e denaro per essere risolto.
-            </p>
+            Anche senza perdita di denaro, un attacco alla credibilità può danneggiarci a livello professionale
+            o privato. La comparsa di video compromettenti sui social, l'invio di mail denigratorie o la
+            pubblicazione di post offensivi sui profili aziendali possono creare un danno che richiede
+            tempo e denaro per essere risolto.
         </div>
 
-        <button class="accordion-btn" onclick="toggleAccordion('acc2')">Tutelare le finanze</button>
+        <button class="accordion-btn" onclick="toggleAccordion(this, 'acc2')">Tutelare le finanze</button>
         <div class="accordion-content" id="acc2">
-            <p>
-                L'accesso ai conti bancari non sempre è una frode che si scopre rapidamente, soprattutto se
-                gli hacker agiscono gradualmente. Non si vedrà una transazione massiccia che fa scattare gli
-                allarmi, il che espone a pericoli maggiori.
-            </p>
+            L'accesso ai conti bancari non sempre è una frode che si scopre rapidamente, soprattutto se
+            gli hacker agiscono gradualmente. Non si vedrà una transazione massiccia che fa scattare gli
+            allarmi, il che espone a pericoli maggiori.
         </div>
 
-        <button class="accordion-btn" onclick="toggleAccordion('acc3')">Proteggere le informazioni di lavoro</button>
+        <button class="accordion-btn" onclick="toggleAccordion(this, 'acc3')">Proteggere le informazioni di lavoro</button>
         <div class="accordion-content" id="acc3">
-            <p>
-                Se l'Identità digitale viene rubata, un criminale informatico potrebbe agire per conto nostro.
-                Un esempio noto è il <strong>Business Email Compromise (BEC)</strong>: l'identità di un CEO viene usata
-                per inviare mail ai dipendenti richiedendo trasferimenti di denaro.
-            </p>
+            Se l'Identità digitale viene rubata, un criminale informatico potrebbe agire per conto nostro.
+            Un esempio noto è il <strong>Business Email Compromise (BEC)</strong>: l'identità di un CEO viene usata
+            per inviare mail ai dipendenti richiedendo trasferimenti di denaro.
         </div>
     </div>
 
     <div class="sezione" id="minacce">
         <h2>Minacce all'Identità Digitale</h2>
 
-        <p>
+        <p style="margin-bottom: 18px;">
             Ottenere le chiavi d'accesso agli account o ai conti permette ai criminali informatici di attuare
             frodi di vario tipo. Ecco le principali:
         </p>
 
         <div class="minaccia">
-            <h4>Phishing</h4>
+            <h4>// Phishing</h4>
             <p>
-                Inizia con una email o altra comunicazione fraudolenta che sembra provenire da un mittente
+                Inizia con una email o comunicazione fraudolenta che sembra provenire da un mittente
                 affidabile (es. la propria banca). La vittima viene persuasa a fornire informazioni riservate
                 su un sito truffa o a scaricare un malware. È una delle forme di frode più diffuse ed efficaci.
             </p>
         </div>
 
         <div class="minaccia">
-            <h4>Vishing (Voice Phishing)</h4>
+            <h4>// Vishing (Voice Phishing)</h4>
             <p>
                 Truffa effettuata tramite telefonate. I malfattori si fingono dipendenti della banca e invitano
                 l'utente a fornire dati sensibili. La voce umana può essere sostituita da un messaggio preregistrato.
@@ -690,7 +1079,7 @@
         </div>
 
         <div class="minaccia">
-            <h4>Smishing (SMS Phishing)</h4>
+            <h4>// Smishing (SMS Phishing)</h4>
             <p>
                 Truffa effettuata tramite SMS che sembrano provenire dalla banca. Invitano l'utente a cliccare
                 su un link o scaricare un file per fornire dati sensibili.
@@ -698,24 +1087,23 @@
         </div>
 
         <div class="minaccia">
-            <h4>Baiting</h4>
+            <h4>// Baiting</h4>
             <p>
                 Tecnica di social engineering che prevede l'utilizzo di un dispositivo di memorizzazione infetto
                 (es. una chiavetta USB contenente malware) per sferrare un attacco informatico.
             </p>
-        </div> 
+        </div>
 
         <div class="minaccia">
-            <h4>Identity Theft (Furto di Identità)</h4>
+            <h4>// Identity Theft — Furto di Identità</h4>
             <p>
-                Il criminale si avvale di tecniche di <strong>social engineering</strong> per convincere l'utente a cedere
-                i propri dati, o di tecniche di <strong>hacking</strong> per appropriarsene all'insaputa della vittima.
-                Può portare alla creazione di account fittizi, al furto dell'Identità di una persona
-                defunta o alla creazione di fake identity.
+                Il criminale si avvale di tecniche di <strong>social engineering</strong> o di tecniche di <strong>hacking</strong>
+                per appropriarsi dei dati all'insaputa della vittima. Può portare alla creazione di account fittizi,
+                al furto dell'identità di una persona defunta o alla creazione di fake identity.
             </p>
         </div>
 
-        <img src="img/phishing.png" alt="Illustrazione phishing e minacce informatiche" width="500px" height="auto">
+        <img src="img/phishing.png" alt="Illustrazione phishing" style="width: 100%; max-width: 500px; height: auto; border-radius: 8px; margin-top: 16px; border: 1px solid var(--border);">
     </div>
 
     <div class="sezione" id="protezione">
@@ -733,7 +1121,7 @@
         </ul>
 
         <h3>Cosa NON fare mai</h3>
-        <ul class="consiglio-lista">
+        <ul class="consiglio-lista warning-lista">
             <li>Non condividere mai PIN, password o codici OTP con nessuno</li>
             <li>Non trasferire denaro su un altro account a richiesta telefonica o via SMS</li>
             <li>Non fidarsi di chi chiama solo perché conosce i tuoi dati di base</li>
@@ -755,35 +1143,33 @@
                 con la Pubblica Amministrazione.
             </p>
 
-            <p>Documenti integrabili nell'IT-Wallet:</p>
-            <ul>
-                <li>Carta d'Identità</li>
-                <li>SPID e CIE</li>
-                <li>Tessera Sanitaria</li>
-                <li>Carta europea della disabilita</li>
-                <li>Patente di guida</li>
-            </ul>
+            <h3>Documenti integrabili</h3>
+            <div class="wallet-grid">
+                <span class="chip">Carta d'Identità</span>
+                <span class="chip">SPID</span>
+                <span class="chip">CIE</span>
+                <span class="chip">Tessera Sanitaria</span>
+                <span class="chip">Carta Disabilità EU</span>
+                <span class="chip">Patente di guida</span>
+            </div>
         </div>
 
         <h3>Come funziona</h3>
         <p>
             IT-Wallet funziona tramite l'<strong>app IO</strong> e richiede l'uso di SPID o CIE per l'accesso.
-            I documenti sono protetti da codice o impronta digitale e possono essere bloccati in caso di
-            furto o smarrimento del telefono. Entro il <strong>2026</strong> sarà integrato con i sistemi di Identità
+            I documenti sono protetti da codice o impronta digitale. Entro il <strong>2026</strong> sarà integrato con i sistemi di Identità
             digitale europei, permettendo ai cittadini di usufruire dei servizi online negli altri Paesi UE.
         </p>
 
         <h3>SPID resterà?</h3>
         <p>
-            È in discussione la possibilita di ridurre il ruolo dello SPID a favore della CIE come unica
+            È in discussione la possibilità di ridurre il ruolo dello SPID a favore della CIE come unica
             Identità digitale nazionale gestita dallo Stato.
         </p>
     </div>
 
     <div class="sezione" id="applicazioni">
         <h2>Cosa si può fare con SPID / CIE</h2>
-
-        <p>Ecco alcune delle principali applicazioni pratiche:</p>
 
         <table>
             <thead>
@@ -840,30 +1226,24 @@
 </div>
 
 <footer>
-    <p>Pagina realizzata da Samuel sema.</p>
+    <p>Pagina realizzata da <span>Samuel Sema</span> &nbsp;—&nbsp; Identità Digitale</p>
 </footer>
 
 <script>
-    function toggleAccordion(id) {
+    function toggleAccordion(btn, id) {
         var el = document.getElementById(id);
-        if (el.classList.contains('aperto')) {
-            el.classList.remove('aperto');
-        } else {
-            el.classList.add('aperto');
-        }
+        var isOpen = el.classList.contains('aperto');
+        el.classList.toggle('aperto');
+        btn.classList.toggle('aperto');
     }
 
-    // scorrimento fluido
-    var links = document.querySelectorAll('nav a');
-    for (var i = 0; i < links.length; i++) {
-        links[i].addEventListener('click', function(e) {
+    document.querySelectorAll('nav a').forEach(function(link) {
+        link.addEventListener('click', function(e) {
             e.preventDefault();
             var target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-            }
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
         });
-    }
+    });
 </script>
 
 </body>
