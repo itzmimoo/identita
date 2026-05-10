@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identità Digitale - SAMUEL SEMA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #222;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #2c5f8a;
+            color: white;
+            padding: 20px 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        header p {
+            font-size: 14px;
+            color: #cce0f5;
+        }
+
+        nav {
+            background-color: #1a3f5c;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 4px;
+            padding: 8px 10px;
+        }
+
+        nav a {
+            color: #cce0f5;
+            text-decoration: none;
+            font-size: 13px;
+            padding: 5px 12px;
+            border-radius: 3px;
+        }
+
+        nav a:hover {
+            background-color: #2c5f8a;
+            color: white;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px 15px;
+        }
+
+        .sezione {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .sezione h2 {
+            font-size: 20px;
+            color: #2c5f8a;
+            border-bottom: 2px solid #2c5f8a;
+            padding-bottom: 6px;
+            margin-bottom: 14px;
+        }
+
+        .sezione h3 {
+            font-size: 16px;
+            color: #1a3f5c;
+            margin: 16px 0 6px 0;
+        }
+
+        .sezione p {
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+
+        .sezione ul {
+            margin: 8px 0 10px 20px;
+        }
+
+        .sezione ul li {
+            margin-bottom: 5px;
+        }
+
+        .definizione {
+            border-left: 4px solid #2c5f8a;
+            background-color: #eef5fb;
+            padding: 12px 16px;
+            margin: 14px 0;
+            font-style: italic;
+        }
+
+        .img-grande {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin: 14px 0;
+        }
+
+        .img-piccola {
+            display: block;
+            width: 240px;
+            height: auto;
+            border-radius: 4px;
+            float: right;
+            margin: 0 0 12px 18px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+
+        table th {
+            background-color: #2c5f8a;
+            color: white;
+            padding: 9px 12px;
+            text-align: left;
+        }
+
+        table td {
+            padding: 8px 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table tr:nth-child(even) td {
+            background-color: #f0f6fb;
+        }
+
+        .livello {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fafafa;
+        }
+
+        .livello .numero {
+            background-color: #2c5f8a;
+            color: white;
+            min-width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .minaccia {
+            border: 1px solid #e0c0c0;
+            background-color: #fff8f8;
+            border-radius: 4px;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+        }
+
+        .minaccia h4 {
+            color: #a33;
+            margin-bottom: 5px;
+            font-size: 15px;
+        }
+
+        .consiglio-lista {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .consiglio-lista li {
+            padding: 8px 10px 8px 32px;
+            border-bottom: 1px solid #eee;
+            position: relative;
+        }
+
+        .consiglio-lista li::before {
+            content: ">";
+            position: absolute;
+            left: 10px;
+            color: #2c5f8a;
+            font-weight: bold;
+        }
+
+        .accordion-btn {
+            background: none;
+            border: none;
+            color: #2c5f8a;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 4px 0;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+            text-decoration: underline;
+        }
+
+        .accordion-content {
+            display: none;
+            margin-top: 8px;
+        }
+
+        .accordion-content.aperto {
+            display: block;
+        }
+
+        footer {
+            background-color: #1a3f5c;
+            color: #aac8df;
+            text-align: center;
+            padding: 14px;
+            font-size: 13px;
+            margin-top: 30px;
+        }
+
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .highlight {
+            background-color: #fff3cd;
+            padding: 1px 4px;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Identità Digitale</h1>
+    <p>Cosa è, come funziona e come proteggerla -- Samuel Sema</p>
+</header>
+
+<nav>
+    <a href="#definizione">Cos'è</a>
+    <a href="#strumenti">Strumenti</a>
+    <a href="#spid">SPID</a>
+    <a href="#cie">CIE</a>
+    <a href="#cns">CNS</a>
+    <a href="#firma">Firma Digitale</a>
+    <a href="#pec">PEC</a>
+    <a href="#confronto">Confronto</a>
+    <a href="#reputazione">Reputazione</a>
+    <a href="#minacce">Minacce</a>
+    <a href="#protezione">Come proteggersi</a>
+    <a href="#itwallet">IT-Wallet</a>
+    <a href="#applicazioni">Applicazioni</a>
+</nav>
+
+<div class="container">
+
+    <div class="sezione" id="definizione">
+        <h2>Cos'è l'Identità Digitale?</h2>
+
+        <p>
+            L'Identità Digitale è l'insieme dei dati e delle informazioni, o attributi, che definiscono il
+            titolare e costituiscono la rappresentazione virtuale dell'identità reale utilizzabile durante
+            interazioni elettroniche con persone o sistemi informatici.
+        </p>
+
+        <div class="definizione">
+            "L'identità digitale è un insieme di dati che consentono di identificare univocamente una persona,
+            un'azienda o un oggetto e che vengono raccolti, memorizzati e condivisi digitalmente all'interno di
+            un ecosistema di attori e attraverso le tecnologie abilitanti e che permette l'accesso a servizi
+            digitali a valore aggiunto."
+            <br><small>- Osservatorio Digital Identity, Politecnico di Milano</small>
+        </div>
+
+        <p>
+            Quando pubblichiamo o condividiamo informazioni personali online stiamo creando o incrementando
+            la nostra <strong>identità digitale</strong>. Al nostro nome online vengono associati tutti gli
+            attributi che servono per definire la nostra personalita privata e professionale: data di nascita,
+            informazioni sanitarie, indirizzo, numero di telefono, ID di accesso agli account, ecc.
+        </p>
+
+        <img src="img/schema_id.jpg" alt="Schema Identità digitale" class="img-grande">
+
+        <h3>Elementi base</h3>
+        <p>Gli elementi base dell'identità digitale sono due:</p>
+        <ul>
+            <li><strong>L'identità</strong>, cioè il soggetto</li>
+            <li><strong>Gli attributi dell'identità</strong>: tutte le informazioni che vanno oltre i dati anagrafici e biometrici,
+                come il possesso di una patente, certificazioni, brevetti o una laurea.</li>
+        </ul>
+
+        <h3>I due volti dell'identità</h3>
+        <p>
+            L'identità digitale ha due facce principali:
+        </p>
+        <ul>
+            <li><strong>Identità Certificata:</strong> SPID, CIE usate per accedere ai servizi pubblici</li>
+            <li><strong>Identità Sociale:</strong> come ci presentiamo su Instagram, TikTok, LinkedIn</li>
+        </ul>
+
+        <p style="font-style: italic; color: #444;">"Noi siamo ciò che pubblichiamo e ciò che gli altri dicono di noi."</p>
+
+        <p style="margin-top: 10px;">
+            Navigando sul web non si può mai agire in maniera completamente anonima:
+            <span class="highlight">nel web siamo tutti rintracciabili.</span>
+        </p>
+    </div>
+
+    <div class="sezione" id="strumenti">
+        <h2>Strumenti di Identità Digitale in Italia</h2>
+        <p>Gli strumenti di identità digitale attivi in Italia sono quattro principali:</p>
+        <ul>
+            <li><strong>SPID</strong> Sistema Pubblico per l'Identità Digitale</li>
+            <li><strong>CIE</strong> Carta d'Identità Elettronica</li>
+            <li><strong>CNS</strong> Carta Nazionale dei Servizi</li>
+            <li><strong>Firma digitale</strong></li>
+        </ul>
+        <p>
+            A partire dal <strong>28 febbraio 2021</strong>, SPID e CIE sono diventate le credenziali uniche per
+            accedere ai servizi online della Pubblica Amministrazione. Le vecchie credenziali sono rimaste valide
+            fino al 1 ottobre 2021.
+        </p>
+    </div>
+
+    <div class="sezione" id="spid">
+        <h2>SPID Sistema Pubblico di Identità Digitale</h2>
+
+        <div class="clearfix">
+            <img src="img/spid_logo.jpg" alt="Logo SPID" class="img-piccola">
+
+            <p>
+                Lo SPID è attivo in Italia dal <strong>15 marzo 2016</strong>. Permette di accedere a tutti i servizi online
+                della Pubblica Amministrazione con un unico sistema di credenziali (username e password),
+                senza dover ricordare decine di password diverse né fare file agli sportelli.
+            </p>
+
+            <p>
+                Con un solo account è possibile accedere a oltre <strong>5.300</strong> tra amministrazioni locali e centrali,
+                enti pubblici e agenzie. Funziona da qualsiasi dispositivo come computer, tablet e smartphone.
+            </p>
+
+            <p>
+                SPID può essere rilasciato da diversi <strong>IdP</strong> autorizzati, tra cui:
+                Aruba, InfoCert, Lepida, Namirial, Poste Italiane, Register, Sielte, TeamSystem e TIM.
+            </p>
+        </div>
+
+        <h3>Cosa serve per richiederlo</h3>
+        <ul>
+            <li>Avere compiuto 18 anni</li>
+            <li>Un documento italiano in corso di validita</li>
+            <li>La tessera sanitaria con il codice fiscale</li>
+            <li>Un indirizzo email personale</li>
+            <li>Il numero di telefono del proprio cellulare personale</li>
+        </ul>
+
+        <h3>I tre livelli di sicurezza SPID</h3>
+
+        <div class="livello">
+            <div class="numero">1</div>
+            <div>
+                <strong>Livello 1 Username e password</strong><br>
+                Richiede solo di inserire il nome utente e la password. Adatto per servizi con bassa criticita.
+            </div>
+        </div>
+        <div class="livello">
+            <div class="numero">2</div>
+            <div>
+                <strong>Livello 2 Credenziali + OTP</strong><br>
+                Oltre alle credenziali richiede l'immissione di un codice temporaneo (OTP) generato da
+                un'apposita app. È il livello più comunemente usato.
+            </div>
+        </div>
+        <div class="livello">
+            <div class="numero">3</div>
+            <div>
+                <strong>Livello 3 Massima sicurezza</strong><br>
+                Prevede, oltre a username e password, l'uso di un supporto fisico (es. smart card) che
+                gestisce chiavi crittografiche. Offerto solo da alcuni Identity Provider.
+            </div>
+        </div>
+
+        <h3>I numeri di SPID</h3>
+        <p>
+            SPID è l'identità digitale certificata più utilizzata in Italia. Il numero di rilasci è passato da circa
+            9 milioni di utenti nel luglio 2020 a oltre 33 milioni a fine 2022, con una crescita del 23%.
+            Nel 2022 si è superato il <strong>miliardo di accessi</strong>, con una crescita del 78% rispetto all'anno precedente.
+        </p>
+
+        <p style="font-size: 13px; color: #555; margin-top: 8px;">
+            La privacy dei dati è garantita e vigilata dal Garante per la protezione dei dati personali.
+            Le informazioni comunicate al gestore di Identità non possono essere utilizzate per scopi commerciali
+            nè cedute a terze parti senza autorizzazione dell'utente.
+        </p>
+    </div>
+
+    <div class="sezione" id="cie">
+        <h2>CIE Carta d'Identità Elettronica</h2>
+
+        <div class="clearfix">
+            <img src="img/CIE.jpg" alt="Carta d'Identità Elettronica" class="img-piccola">
+
+            <p>
+                La CIE è il documento d'Identità dei cittadini italiani emesso dal <strong>Ministero dell'Interno</strong>
+                e prodotto dal Poligrafico e Zecca dello Stato. Grazie a sofisticati elementi di sicurezza e
+                anticontraffazione, permette l'accertamento dell'identità del possessore e l'accesso ai servizi
+                online delle Pubbliche Amministrazioni sia in Italia che nei Paesi dell'Unione Europea.
+            </p>
+
+            <p>
+                La CIE contiene un <strong>microchip</strong> con ulteriori dati per la fruizione di servizi a valore aggiunto.
+                È abbinata a un codice PIN fornito al momento del rilascio, utilizzabile per accedere a servizi
+                online con elevato livello di criticita.
+            </p>
+
+            <p>
+                A differenza dello SPID (gratuito), la CIE ha un <strong>costo di 16,79 euro</strong> e viene rilasciata
+                anche ai minori, fin dalla nascita. Dal 2022 e' possibile usare la CIE anche per servizi di
+                livello 2, tramite username, password e codice OTP tramite l'app <strong>CieID</strong>.
+            </p>
+        </div>
+
+        <p>
+            Per la lettura della carta è necessario un lettore di carte elettroniche oppure uno smartphone
+            con tecnologia <strong>NFC</strong> e l'app CieID.
+        </p>
+
+        <h3>Livelli di autenticazione CIE</h3>
+        <div class="livello">
+            <div class="numero">1</div>
+            <div><strong>Username e password</strong></div>
+        </div>
+        <div class="livello">
+            <div class="numero">2</div>
+            <div><strong>Credenziali + secondo fattore</strong> (OTP via SMS o scansione QR code)</div>
+        </div>
+        <div class="livello">
+            <div class="numero">3</div>
+            <div><strong>Lettore NFC o smart card reader</strong> il livello massimo previsto dagli standard europei</div>
+        </div>
+    </div>
+
+    <div class="sezione" id="cns">
+        <h2>CNS Carta Nazionale dei Servizi</h2>
+
+        <div class="clearfix">
+            <img src="img/tessera.jpg" alt="Tessera sanitaria CNS" class="img-piccola">
+
+            <p>
+                La CNS è uno strumento che permette di identificare con certezza il cittadino online. Si tratta
+                di una <strong>chiavetta USB o smart card</strong> dotata di microchip (e tecnologia contactless) che consente
+                di accedere ai servizi messi a disposizione dalla pubblica amministrazione in internet.
+            </p>
+
+            <p>
+                Per i cittadini, la <strong>tessera sanitaria ha anche valore di CNS</strong> e, tramite un lettore di carte
+                elettroniche, offre l'accesso a servizi come INPS, INAIL e Agenzia delle Entrate.
+            </p>
+
+            <p>
+                Le CNS erogate a imprese e professionisti permettono anche di consultare le informazioni
+                relative alla propria azienda nel Registro Imprese.
+            </p>
+
+            <p>
+                Dal <strong>1 ottobre 2021</strong>, insieme a SPID e CIE, è uno dei tre sistemi ufficiali per accedere
+                ai servizi online delle pubbliche amministrazioni.
+            </p>
+        </div>
+    </div>
+
+    <div class="sezione" id="firma">
+        <h2>Firma Digitale</h2>
+
+        <div class="clearfix">
+            <img src="img/firma_digitale.jpg" alt="Firma digitale" class="img-piccola" style="width: 440px;">
+
+            <p>
+                La firma digitale si basa su tecniche di <strong>crittografia</strong> e permette di associare in modo sicuro
+                una chiave digitale a documenti informatici (contratti, dichiarazioni, atti amministrativi),
+                attribuendo loro <strong>validità legale</strong>.
+            </p>
+
+            <p>
+                Ha lo stesso valore legale di una firma autografa e garantisce:
+            </p>
+            <ul>
+                <li><strong>Autenticità della firma</strong> identità del sottoscrittore</li>
+                <li><strong>Integrità del documento</strong> nessuna modifica dopo la firma</li>
+                <li><strong>Non ripudio</strong> il sottoscrittore non può disconoscerla senza prove</li>
+            </ul>
+
+            <p>
+                Si ottiene dai prestatori di servizi fiduciari presenti negli elenchi di fiducia dei singoli Stati
+                membri europei. I prodotti più comuni sono una <strong>smart card</strong> con certificato di firma o una
+                <strong>chiavetta USB</strong> con sim card integrata contenente il certificato.
+            </p>
+        </div>
+    </div>
+
+    <div class="sezione" id="pec">
+        <h2>PEC Posta Elettronica Certificata</h2>
+
+        <div class="clearfix">
+            <img src="img/pec.jpg" alt="Posta Elettronica Certificata" class="img-piccola" style="width: 500px;">
+
+            <p>
+                La PEC è un sistema informatico che permette di inviare e ricevere email con <strong>validità giuridica</strong>,
+                equiparabili per legge a una raccomandata con ricevuta di ritorno. Identifica in maniera univoca
+                mittente e destinatario, garantendo che il contenuto non sia modificabile.
+            </p>
+
+            <p>
+                Caratteristiche principali:
+            </p>
+            <ul>
+                <li>Certifica l'invio e la ricezione del messaggio con data e ora</li>
+                <li>Il contenuto è garantito e non modificabile</li>
+                <li>I messaggi vanno conservati per 10 anni (valore giuridico)</li>
+                <li>Il gestore del servizio offre solitamente anche il servizio di conservazione digitale</li>
+            </ul>
+
+            <h3>Perché attivare una PEC?</h3>
+            <ul>
+                <li>Comunicazioni di condominio</li>
+                <li>Invio documenti alla Pubblica Amministrazione</li>
+                <li>Ricevere fatture elettroniche</li>
+                <li>Disdire polizze assicurative e contratti</li>
+                <li>Comunicazioni di lavoro (come la busta paga)</li>
+                <li>Comunicare con banche e istituti finanziari</li>
+                <li>Prenotare visite mediche e ricevere referti</li>
+            </ul>
+        </div>
+
+        <h3>Domicilio Digitale (INAD)</h3>
+        <p>
+            Una volta ottenuta la casella PEC, è possibile nominare il proprio domicilio digitale su
+            <strong>INAD</strong> (Indice Nazionale dei Domicili Digitali) all'indirizzo domiciliodigitale.gov.it.
+            Si accede con CIE, SPID o CNS e si inserisce l'indirizzo PEC.
+        </p>
+    </div>
+
+    <div class="sezione" id="confronto">
+        <h2>Confronto tra SPID e CIE</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Caratteristica</th>
+                    <th>SPID</th>
+                    <th>CIE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Tipo</td>
+                    <td>Credenziali digitali (username + password)</td>
+                    <td>Documento fisico con chip elettronico</td>
+                </tr>
+                <tr>
+                    <td>Chi lo rilascia</td>
+                    <td>Identity Provider privati (Aruba, Poste Italiane, ecc.)</td>
+                    <td>Ministero dell'Interno / Comune di residenza</td>
+                </tr>
+                <tr>
+                    <td>Costo</td>
+                    <td>Gratuito</td>
+                    <td>16,79 euro</td>
+                </tr>
+                <tr>
+                    <td>Età minima</td>
+                    <td>18 anni</td>
+                    <td>Fin dalla nascita</td>
+                </tr>
+                <tr>
+                    <td>Livello sicurezza massimo</td>
+                    <td>Livello 3 (solo alcuni IdP)</td>
+                    <td>Livello 3 (di default)</td>
+                </tr>
+                <tr>
+                    <td>Dispositivo necessario</td>
+                    <td>Smartphone o PC con app IdP</td>
+                    <td>Smartphone NFC o lettore smart card</td>
+                </tr>
+                <tr>
+                    <td>Valido in UE</td>
+                    <td>Solo in Italia</td>
+                    <td>Si, anche in altri Paesi UE</td>
+                </tr>
+                <tr>
+                    <td>Firma documenti online</td>
+                    <td>Si</td>
+                    <td>Si</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="sezione" id="reputazione">
+        <h2>Digital Footprint</h2>
+
+        <p>
+            L'<strong>impronta digitale</strong> è la traccia che lasciamo ogni volta che navighiamo online.
+            Ogni click, ogni post, ogni ricerca contribuisce a costruire la nostra reputazione digitale.
+        </p>
+
+        <img src="img/digital_foor.jpg" alt="Digital footprint - impronta digitale" class="img-grande">
+
+        <h3>Perché è importante?</h3>
+        <ul>
+            <li>Influenza le amicizie e i rapporti sociali</li>
+            <li>Viene controllata da università e futuri datori di lavoro</li>
+            <li>Il web non dimentica facilmente (<strong>Diritto all'oblio</strong>)</li>
+        </ul>
+
+        <h3>Motivazioni per proteggere l'identità digitale</h3>
+
+        <button class="accordion-btn" onclick="toggleAccordion('acc1')">Difendere la reputazione</button>
+        <div class="accordion-content" id="acc1">
+            <p>
+                Anche senza perdita di denaro, un attacco alla credibilita può danneggiarci a livello professionale
+                o privato. La comparsa di video compromettenti sui social, l'invio di mail denigratorie o la
+                pubblicazione di post offensivi sui profili aziendali possono creare un danno che richiede
+                tempo e denaro per essere risolto.
+            </p>
+        </div>
+
+        <button class="accordion-btn" onclick="toggleAccordion('acc2')">Tutelare le finanze</button>
+        <div class="accordion-content" id="acc2">
+            <p>
+                L'accesso ai conti bancari non sempre è una frode che si scopre rapidamente, soprattutto se
+                gli hacker agiscono gradualmente. Non si vedrà una transazione massiccia che fa scattare gli
+                allarmi, il che espone a pericoli maggiori.
+            </p>
+        </div>
+
+        <button class="accordion-btn" onclick="toggleAccordion('acc3')">Proteggere le informazioni di lavoro</button>
+        <div class="accordion-content" id="acc3">
+            <p>
+                Se l'Identità digitale viene rubata, un criminale informatico potrebbe agire per conto nostro.
+                Un esempio noto è il <strong>Business Email Compromise (BEC)</strong>: l'identità di un CEO viene usata
+                per inviare mail ai dipendenti richiedendo trasferimenti di denaro.
+            </p>
+        </div>
+    </div>
+
+    <div class="sezione" id="minacce">
+        <h2>Minacce all'Identità Digitale</h2>
+
+        <p>
+            Ottenere le chiavi d'accesso agli account o ai conti permette ai criminali informatici di attuare
+            frodi di vario tipo. Ecco le principali:
+        </p>
+
+        <div class="minaccia">
+            <h4>Phishing</h4>
+            <p>
+                Inizia con una email o altra comunicazione fraudolenta che sembra provenire da un mittente
+                affidabile (es. la propria banca). La vittima viene persuasa a fornire informazioni riservate
+                su un sito truffa o a scaricare un malware. È una delle forme di frode più diffuse ed efficaci.
+            </p>
+        </div>
+
+        <div class="minaccia">
+            <h4>Vishing (Voice Phishing)</h4>
+            <p>
+                Truffa effettuata tramite telefonate. I malfattori si fingono dipendenti della banca e invitano
+                l'utente a fornire dati sensibili. La voce umana può essere sostituita da un messaggio preregistrato.
+            </p>
+        </div>
+
+        <div class="minaccia">
+            <h4>Smishing (SMS Phishing)</h4>
+            <p>
+                Truffa effettuata tramite SMS che sembrano provenire dalla banca. Invitano l'utente a cliccare
+                su un link o scaricare un file per fornire dati sensibili.
+            </p>
+        </div>
+
+        <div class="minaccia">
+            <h4>Baiting</h4>
+            <p>
+                Tecnica di social engineering che prevede l'utilizzo di un dispositivo di memorizzazione infetto
+                (es. una chiavetta USB contenente malware) per sferrare un attacco informatico.
+            </p>
+        </div> 
+
+        <div class="minaccia">
+            <h4>Identity Theft (Furto di Identità)</h4>
+            <p>
+                Il criminale si avvale di tecniche di <strong>social engineering</strong> per convincere l'utente a cedere
+                i propri dati, o di tecniche di <strong>hacking</strong> per appropriarsene all'insaputa della vittima.
+                Può portare alla creazione di account fittizi, al furto dell'Identità di una persona
+                defunta o alla creazione di fake identity.
+            </p>
+        </div>
+
+        <img src="img/phishing.png" alt="Illustrazione phishing e minacce informatiche" width="500px" height="auto">
+    </div>
+
+    <div class="sezione" id="protezione">
+        <h2>Come Proteggere l'Identità Digitale</h2>
+
+        <h3>Consigli generali</h3>
+        <ul class="consiglio-lista">
+            <li>Cambiare frequentemente le password di accesso</li>
+            <li>Scegliere password forti: almeno 12 caratteri, con lettere maiuscole, minuscole, numeri e simboli</li>
+            <li>Non usare la stessa password per più account</li>
+            <li>Custodire le password in modo sicuro</li>
+            <li>Usare un buon antivirus</li>
+            <li>Attivare l'<strong>autenticazione a due fattori (2FA)</strong></li>
+            <li>Non usare credenziali uguali per sistemi di pagamento e social network</li>
+        </ul>
+
+        <h3>Cosa NON fare mai</h3>
+        <ul class="consiglio-lista">
+            <li>Non condividere mai PIN, password o codici OTP con nessuno</li>
+            <li>Non trasferire denaro su un altro account a richiesta telefonica o via SMS</li>
+            <li>Non fidarsi di chi chiama solo perché conosce i tuoi dati di base</li>
+            <li>Non usare wi-fi pubblici o non protetti per operazioni sensibili</li>
+            <li>Non acquistare online se l'offerta sembra troppo vantaggiosa per essere vera</li>
+        </ul>
+    </div>
+
+    <div class="sezione" id="itwallet">
+        <h2>IT-Wallet e il Futuro dell'Identità Digitale</h2>
+
+        <div class="clearfix">
+            <img src="img/appio.jpg" alt="IT-Wallet App IO" class="img-piccola">
+
+            <p>
+                L'<strong>IT-Wallet</strong> è un portafoglio digitale che consentirà di conservare nel proprio smartphone
+                la versione digitale di tutti i principali documenti personali. Non si pone come sostituto
+                di SPID e CIE, ma li conterrà al suo interno diventando lo strumento principale per interagire
+                con la Pubblica Amministrazione.
+            </p>
+
+            <p>Documenti integrabili nell'IT-Wallet:</p>
+            <ul>
+                <li>Carta d'Identità</li>
+                <li>SPID e CIE</li>
+                <li>Tessera Sanitaria</li>
+                <li>Carta europea della disabilita</li>
+                <li>Patente di guida</li>
+            </ul>
+        </div>
+
+        <h3>Come funziona</h3>
+        <p>
+            IT-Wallet funziona tramite l'<strong>app IO</strong> e richiede l'uso di SPID o CIE per l'accesso.
+            I documenti sono protetti da codice o impronta digitale e possono essere bloccati in caso di
+            furto o smarrimento del telefono. Entro il <strong>2026</strong> sarà integrato con i sistemi di Identità
+            digitale europei, permettendo ai cittadini di usufruire dei servizi online negli altri Paesi UE.
+        </p>
+
+        <h3>SPID resterà?</h3>
+        <p>
+            È in discussione la possibilita di ridurre il ruolo dello SPID a favore della CIE come unica
+            Identità digitale nazionale gestita dallo Stato.
+        </p>
+    </div>
+
+    <div class="sezione" id="applicazioni">
+        <h2>Cosa si può fare con SPID / CIE</h2>
+
+        <p>Ecco alcune delle principali applicazioni pratiche:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Servizio</th>
+                    <th>Cosa si può fare</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Fascicolo Sanitario Elettronico</strong></td>
+                    <td>Consultare esami, ricette, presentare esenzioni, prenotare visite</td>
+                </tr>
+                <tr>
+                    <td><strong>Agenzia delle Entrate</strong></td>
+                    <td>Consultare il cassetto fiscale, dichiarazioni dei redditi, fatture ricevute</td>
+                </tr>
+                <tr>
+                    <td><strong>INPS</strong></td>
+                    <td>Cedolini della pensione, CU, fascicolo previdenziale, NASPI</td>
+                </tr>
+                <tr>
+                    <td><strong>Agenzia delle Riscossioni</strong></td>
+                    <td>Posizione debitoria, rateizzazione, rottamazione cartelle</td>
+                </tr>
+                <tr>
+                    <td><strong>PagoPA</strong></td>
+                    <td>Pagamenti verso la Pubblica Amministrazione</td>
+                </tr>
+                <tr>
+                    <td><strong>App IO</strong></td>
+                    <td>Gestione di tutti i servizi pubblici digitali in un unico canale</td>
+                </tr>
+                <tr>
+                    <td><strong>ANPR</strong></td>
+                    <td>Certificati anagrafici, cambio di residenza, visura dei propri dati</td>
+                </tr>
+                <tr>
+                    <td><strong>ACI</strong></td>
+                    <td>Visure PRA, codice della strada digitale, bollo auto</td>
+                </tr>
+                <tr>
+                    <td><strong>Portale Servizi Lavoro</strong></td>
+                    <td>Dimissioni volontarie online</td>
+                </tr>
+                <tr>
+                    <td><strong>Bonus governativi</strong></td>
+                    <td>Bonus revisione auto, bonus trasporti, 18App per neo-maggiorenni</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<footer>
+    <p>Pagina realizzata a scopo didattico &mdash; Fonti: slide Prof.ssa Claudia Bernabei e opuscolo Federconsumatori Piacenza</p>
+</footer>
+
+<script>
+    function toggleAccordion(id) {
+        var el = document.getElementById(id);
+        if (el.classList.contains('aperto')) {
+            el.classList.remove('aperto');
+        } else {
+            el.classList.add('aperto');
+        }
+    }
+
+    // scorrimento fluido
+    var links = document.querySelectorAll('nav a');
+    for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', function(e) {
+            e.preventDefault();
+            var target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
